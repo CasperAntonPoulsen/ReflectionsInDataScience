@@ -1,0 +1,4 @@
+pandas @ file:///C:/ci/pandas_1635506685681/work
+praw==7.5.0
+prawcore==2.3.0
+json5 @ file:///tmp/build/80754af9/json5_1624432770122/work
