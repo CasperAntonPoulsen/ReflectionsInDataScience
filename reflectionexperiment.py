@@ -48,7 +48,7 @@ class ReflectionExperimentReddit:
         # Check the attributes of a post
         noVotes = post.score == 1
         noComments = post.num_comments == 0
-        isBlacklisted = post in self.blacklist
+        isBlacklisted = post.subreddit in self.blacklist
 
 
         # If both conditions are met, return True, else False
@@ -115,6 +115,7 @@ class ReflectionExperimentReddit:
         df = self.loadSavedPosts()
         if df.empty: 
             return
+        
         _df = df[["id", "isExperimental"]].drop_duplicates()
 
         for idx, post in _df.iterrows():
