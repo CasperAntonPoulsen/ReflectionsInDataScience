@@ -113,6 +113,8 @@ class ReflectionExperimentReddit:
 
     def checkSavedPosts(self):
         df = self.loadSavedPosts()
+        if df.empty: 
+            return
         _df = df[["id", "isExperimental"]].drop_duplicates()
 
         for idx, post in _df.iterrows():
