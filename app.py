@@ -1,11 +1,14 @@
 import os
 from reflectionexperiment import ReflectionExperimentReddit
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def main():
 
     r = ReflectionExperimentReddit(
             "postData.json",
-            int(os.environ.get("POSTLIMIT")),
+            300,
             os.environ.get("CLIENT_ID"),
             os.environ.get("CLIENT_SECRET"),
             os.environ.get("USER_AGENT"),
@@ -18,4 +21,5 @@ def main():
     r.findNewPosts()
 
 if __name__ == "__main__":
+
     main()

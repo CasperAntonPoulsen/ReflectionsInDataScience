@@ -29,14 +29,14 @@ class ReflectionExperimentReddit:
         self.blacklist.append(page)
 
     def addPages(self, pages):
-        _pages = self.pages
+        _pages = self.blacklist
 
         try:
             for page in pages:
                 self.addPage(page)
         except TypeError:
             # Revert to previous state before raising the error
-            self.pages = _pages
+            self.blacklist = _pages
             raise TypeError("page name is not string, reverting to past state")
             
     def addPagesFromFile(self, filename):
@@ -58,6 +58,7 @@ class ReflectionExperimentReddit:
             return False
     
     def likePost(self, post):
+        time.sleep(1)
         post.upvote()
 
     def createPostData(self, id, isExperimental):
@@ -92,6 +93,7 @@ class ReflectionExperimentReddit:
 
     def loadSavedPosts(self):
         return pd.read_json("postData.json", lines=True)
+
         
     def checkPost(self, oldPostData):
         time.sleep(1)
@@ -110,13 +112,17 @@ class ReflectionExperimentReddit:
 
         return postData
 
+    def olderThan24Hours(self, dateTime):
+        return (datetime.datetime.now() - dateTime) > datetime.timedelta(days=1)
 
     def checkSavedPosts(self):
         df = self.loadSavedPosts()
         if df.empty: 
             return
         
-        _df = df[["id", "isExperimental"]].drop_duplicates()
+        gb = df.groupby(["id","isExperimental"])
+        _df = gb.agg({"datetime":np.max})
 
         for idx, post in _df.iterrows():
-            self.savePost(self.checkPost({"id":post[0], "isExperimental":post[1]}))
+            if self.olderThan24Hours(post[2]):
+                self.savePost(self.checkPost({"id":post[0], "isExperimental":post[1]}))
