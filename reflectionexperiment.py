@@ -4,6 +4,7 @@ import json
 import pandas as pd
 import time
 import numpy as np
+import datetime
 
 class ReflectionExperimentReddit:
     def __init__(self, savedPostsFilename, postLimit, clientId, clientSecret, userAgent, username, password):
@@ -122,6 +123,7 @@ class ReflectionExperimentReddit:
         gb = df.groupby(["id","isExperimental"])
         _df = gb.agg({"datetime":np.max})
 
-        for idx, post in _df.iterrows():
+        for idx, post in _df.reset_index().iterrows():
+
             if self.olderThan24Hours(post[2]):
                 self.savePost(self.checkPost({"id":post[0], "isExperimental":post[1]}))
