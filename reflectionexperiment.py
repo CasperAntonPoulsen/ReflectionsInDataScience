@@ -93,7 +93,7 @@ class ReflectionExperimentReddit:
                     # Bad way to handle not being able to like, but it will be caught in the logs
                     try:
                         self.likePost(post)
-                    except Exception e:
+                    except Exception as e:
                         sys.stdout.write(e)
                         continue
 
