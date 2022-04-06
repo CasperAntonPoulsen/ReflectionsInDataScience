@@ -5,6 +5,7 @@ import pandas as pd
 import time
 import numpy as np
 import datetime
+import sys
 
 class ReflectionExperimentReddit:
     def __init__(self, savedPostsFilename, postLimit, clientId, clientSecret, userAgent, username, password):
@@ -88,8 +89,15 @@ class ReflectionExperimentReddit:
                 isExperimental = bool(random.randint(0,1))
 
                 if isExperimental:
-                    self.likePost(post)
-                    
+
+                    # Bad way to handle not being able to like, but it will be caught in the logs
+                    try:
+                        self.likePost(post)
+                    except Exception e:
+                        sys.stdout.write(e)
+                        continue
+
+
                 self.savePost(self.createPostData(post.id, isExperimental))
 
     def loadSavedPosts(self):
