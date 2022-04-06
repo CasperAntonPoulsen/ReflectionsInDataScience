@@ -3,6 +3,7 @@ import praw
 import json
 import pandas as pd
 import time
+import numpy as np
 
 class ReflectionExperimentReddit:
     def __init__(self, savedPostsFilename, postLimit, clientId, clientSecret, userAgent, username, password):
@@ -90,10 +91,8 @@ class ReflectionExperimentReddit:
                     
                 self.savePost(self.createPostData(post.id, isExperimental))
 
-
     def loadSavedPosts(self):
         return pd.read_json("postData.json", lines=True)
-
         
     def checkPost(self, oldPostData):
         time.sleep(1)
