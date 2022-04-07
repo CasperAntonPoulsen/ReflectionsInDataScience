@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "app.py", line 25, in <module>
+    main()
+  File "app.py", line 21, in main
+    r.findNewPosts()
+  File "/home/Casper/ReflectionsInDataScience/reflectionexperiment.py", line 91, in findNewPosts
+    self.likePost(post)
+  File "/home/Casper/ReflectionsInDataScience/reflectionexperiment.py", line 64, in likePost
+    post.upvote()
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/models/reddit/mixins/votable.py", line 91, in upvote
+    self._vote(direction=1)
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/models/reddit/mixins/votable.py", line 9, in _vote
+    self._reddit.post(
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/reddit.py", line 793, in post
+    return self._objectify_request(
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/reddit.py", line 696, in _objectify_request
+    self.request(
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/reddit.py", line 885, in request
+    return self._core.request(
+  File "/home/Casper/.local/lib/python3.8/site-packages/prawcore/sessions.py", line 330, in request
+    return self._request_with_retries(
+  File "/home/Casper/.local/lib/python3.8/site-packages/prawcore/sessions.py", line 266, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.NotFound: received 404 HTTP response
+Traceback (most recent call last):
+  File "app.py", line 2, in <module>
+    from reflectionexperiment import ReflectionExperimentReddit
+  File "/home/Casper/ReflectionsInDataScience/reflectionexperiment.py", line 96
+    except Exception e:
+                     ^
+SyntaxError: invalid syntax
+received 404 HTTP responsereceived 404 HTTP responsereceived 404 HTTP responsereceived 404 HTTP responseTraceback (most recent call last):
+  File "app.py", line 25, in <module>
+    main()
+  File "app.py", line 20, in main
+    r.checkSavedPosts()
+  File "/home/Casper/ReflectionsInDataScience/reflectionexperiment.py", line 137, in checkSavedPosts
+    self.savePost(self.checkPost({"id":post[0], "isExperimental":post[1]}))
+  File "/home/Casper/ReflectionsInDataScience/reflectionexperiment.py", line 110, in checkPost
+    nComments = post.num_comments
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/models/reddit/base.py", line 34, in __getattr__
+    self._fetch()
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/models/reddit/submission.py", line 629, in _fetch
+    data = self._fetch_data()
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/models/reddit/submission.py", line 626, in _fetch_data
+    return self._reddit.request("GET", path, params)
+  File "/home/Casper/.local/lib/python3.8/site-packages/praw/reddit.py", line 885, in request
+    return self._core.request(
+  File "/home/Casper/.local/lib/python3.8/site-packages/prawcore/sessions.py", line 330, in request
+    return self._request_with_retries(
+  File "/home/Casper/.local/lib/python3.8/site-packages/prawcore/sessions.py", line 266, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.Forbidden: received 403 HTTP response

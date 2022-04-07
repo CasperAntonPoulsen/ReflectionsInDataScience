@@ -94,7 +94,7 @@ class ReflectionExperimentReddit:
                     try:
                         self.likePost(post)
                     except Exception as e:
-                        sys.stdout.write(e)
+                        sys.stdout.write(str(e))
                         continue
 
 
